@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+#include <cmath>
+#include <cstring>
+#include <queue>
+
+using namespace std;
+
+int n, m;
+int arr[9];
+int path[9];
+int used[9];
+
+
+void func(int now) {
+	if (now >= m) {
+		for (int i = 0; i < m; i++) {
+			cout << path[i] << " ";
+		}
+		cout << "\n";
+		return;
+	}
+	int prev = 0;
+	for (int i = 0; i < n; i++) {
+		
+		if (prev != arr[i]) {
+			if (now > 0 && path[now - 1] > arr[i]) continue;
+			path[now] = arr[i];
+			prev = arr[i];
+			func(now + 1);
+			path[now] = 0;
+		}
+	}
+}
+
+int main() {
+	
+	cin >> n >> m;
+
+	for (int i = 0; i < n; i++) {
+		cin >> arr[i];
+	}
+	sort(arr, arr + n);
+
+	func(0);
+
+	
+	return 0;
+}
