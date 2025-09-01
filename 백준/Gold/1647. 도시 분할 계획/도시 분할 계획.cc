@@ -62,20 +62,19 @@ int main() {
     sort(mst, mst + m);
 
     int sum = 0;
-    int connect = 0;
+    int cost = 0;
 
     for (int i = 0; i < m; i++) {
         node now = mst[i];
 
-        if (connect == n - 2) break;
         if (find(now.start) == find(now.end)) continue;
 
         Union(now.start, now.end);
-        connect++;
         sum += now.cost;
+        cost = now.cost;
     }
 
-    cout << sum;
+    cout << sum - cost;
 
     return 0;
 }
