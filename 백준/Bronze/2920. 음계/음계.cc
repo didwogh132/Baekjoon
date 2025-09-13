@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -8,7 +8,7 @@ int main() {
 
     for (int i = 0; i < 8; i++) {
         int x;
-        cin >> x;
+        scanf("%d", &x);
         pack = (pack << 3) | (unsigned int)(x - 1);
     }
 
@@ -24,13 +24,13 @@ int main() {
     }
 
     if (pack == asc) {
-        cout << "ascending";
+        printf("ascending");
     }
     else if (pack == desc) {
-        cout << "descending";
+        printf("descending");
     }
     else {
-        cout << "mixed";
+        printf("mixed");
     }
 
 
