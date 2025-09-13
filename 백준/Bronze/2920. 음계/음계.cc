@@ -1,17 +1,8 @@
 #include <stdio.h>
-
 int main() {
-    unsigned int pack = 0x00;
-
-    for (int i = 0; i < 8; i++) {
-        int x;
-        scanf("%d", &x);
-        pack = (pack << 3) | (unsigned int)(x - 1);
-    }
-
-    if (pack == 0x53977) printf("ascending");
-    else if (pack == 0xFAC688) printf("descending");
-    else printf("mixed");
-
-    return 0;
+    unsigned int p=0;
+    for(int i=0,x;i<8;i++){scanf("%d",&x);p=(p<<3)|(x-1);}
+    if(p==0x53977) puts("ascending");
+    else if(p==0xFAC688) puts("descending");
+    else puts("mixed");
 }
