@@ -30,19 +30,6 @@ void bfs(int y, int x, int k) {
 
         for (int i = 0; i < 4; i++) {
             int ny, nx, nk;
-            if (now.k > 0) {
-                for (int j = 0; j < 8; j++) {
-                    ny = now.y + yd[j];
-                    nx = now.x + xd[j];
-
-                    if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
-                    if (arr[ny][nx] == 1)continue;
-                    nk = now.k - 1;
-                    if (visited[nk][ny][nx] > -1) continue;
-                    visited[nk][ny][nx] = visited[now.k][now.y][now.x] + 1;
-                    q.push({ ny, nx, nk });
-                }
-            }
             ny = now.y + ydir[i];
             nx = now.x + xdir[i];
             nk = now.k;
@@ -53,6 +40,19 @@ void bfs(int y, int x, int k) {
 
             visited[nk][ny][nx] = visited[now.k][now.y][now.x] + 1;
             q.push({ ny, nx, nk });
+        }
+        if (now.k > 0) {
+            for (int j = 0; j < 8; j++) {
+                int ny, nx, nk;
+                ny = now.y + yd[j];
+                nx = now.x + xd[j];
+                if (ny < 0 || nx < 0 || ny >= n || nx >= m) continue;
+                if (arr[ny][nx] == 1)continue;
+                nk = now.k - 1;
+                if (visited[nk][ny][nx] > -1) continue;
+                visited[nk][ny][nx] = visited[now.k][now.y][now.x] + 1;
+                q.push({ ny, nx, nk });
+            }
         }
     }
 }
