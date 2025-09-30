@@ -28,6 +28,11 @@ void bfs(int y, int x, int k) {
     while (!q.empty()) {
         node now = q.front(); q.pop();
 
+        if(now.y == n-1 && now.x == m-1) {
+            cout << visited[now.k][now.y][now.x];
+            return;
+        }
+        
         for (int i = 0; i < 4; i++) {
             int ny, nx, nk;
             ny = now.y + ydir[i];
@@ -55,6 +60,8 @@ void bfs(int y, int x, int k) {
             }
         }
     }
+    
+    cout << -1;
 }
 
 int main() {
@@ -78,13 +85,6 @@ int main() {
                 ans = visited[i][n - 1][m - 1];
             }
         }
-    }
-
-    if (ans == INT_MAX) {
-        cout << -1;
-    }
-    else {
-        cout << ans;
     }
 
     return 0;
