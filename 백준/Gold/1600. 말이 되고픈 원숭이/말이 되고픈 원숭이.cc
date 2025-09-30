@@ -78,14 +78,5 @@ int main() {
 
     bfs(0, 0, k);
 
-    int ans = INT_MAX;
-    for (int i = 0; i <= k; i++) {
-        if (visited[i][n - 1][m - 1] != -1) {
-            if (visited[i][n - 1][m - 1] < ans) {
-                ans = visited[i][n - 1][m - 1];
-            }
-        }
-    }
-
     return 0;
 }
