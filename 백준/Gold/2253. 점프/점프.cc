@@ -8,7 +8,7 @@
 
 using namespace std;
 
-int visited[200][10010];
+int visited[150][10010];
 int n, m;
 bool arr[10010];
 int dir[] = { -1, 0, 1 };
