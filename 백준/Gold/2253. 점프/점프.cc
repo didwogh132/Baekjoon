@@ -1,12 +1,17 @@
 #include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
 #include <queue>
+#include <climits>
 #include <memory.h>
 
 using namespace std;
 
-int visited[300][10010];
+int visited[200][10010];
 int n, m;
 bool arr[10010];
+int dir[] = { -1, 0, 1 };
 struct node {
 	int num;
 	int cost;
@@ -20,34 +25,25 @@ void bfs() {
 	while (!q.empty()) {
 		node now = q.front(); q.pop();
 
-		if (now.num == n) return;
-		else if (now.num > n) continue;
+		if (now.num == n) {
+            cout << visited[now.cost][now.num];
+            return;
+        }
+        else if (now.num > n) continue;
 
 		for (int i = 0; i < 3; i++) {
-			int next;
-			int nextcost = now.cost;
-			if (i == 0) {
-				nextcost = now.cost - 1;
-				next = now.num + nextcost;
-				if (next <= 1) continue;
-				if (nextcost < 0) continue;
-			}
-			else if (i == 1) {
-				nextcost = now.cost;
-				next = now.num + nextcost;
-				if (next <= 1) continue;
-			}
-			else {
-				nextcost = now.cost + 1;
-				next = now.num + nextcost;
-				if (next <= 1) continue;
-			}
+			int nextcost = now.cost + dir[i];
+			int next = now.num + nextcost;
+			if (next <= 1) continue;
+			if (nextcost < 0) continue;
 			if (arr[next]) continue;
 			if (visited[nextcost][next] > -1) continue;
 			visited[nextcost][next] = visited[now.cost][now.num] + 1;
 			q.push({ next, nextcost });
 		}
 	}
+    cout << -1;
+    return;
 }
 
 int main() {
@@ -66,18 +62,5 @@ int main() {
 
 	bfs();
 
-	int ans = 600;
-	for (int i = 0; i < 300; i++) {
-		if (visited[i][n] != -1) {
-			if (visited[i][n] < ans) ans = visited[i][n];
-		}
-	}
-
-	if (ans == 600) {
-		cout << -1;
-	}
-	else {
-		cout << ans;
-	}
 	return 0;
 }
