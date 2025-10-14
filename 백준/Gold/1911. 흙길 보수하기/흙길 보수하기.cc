@@ -10,16 +10,15 @@ struct node {
 };
 
 bool cmp(node a, node b) {
-	if (a.s < b.s) return true;
-	else return false;
-
-	if (a.e < b.e) return true;
-	else return false;
-	return false;
+    if (a.s != b.s) return a.s < b.s;
+    return a.e < b.e;
 }
 vector<node> arr;
 
 int main() {
+    ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
+    
 	int n, l;
 	cin >> n >> l;
 
@@ -30,32 +29,21 @@ int main() {
 	}
 	sort(arr.begin(), arr.end(), cmp);
 
-	int cnt = 0;
-	int start = 0;
-	int idx = 0;
 
-	while (true) {
-		node now = arr[idx];
-		if (now.s > start) {
-			start = now.s + l;
-			cnt++;
-			if (start > now.e) {
-				idx++;
-			}
-		}
-		else if (start < now.e) {
-			start += l;
-			cnt++;
-			if (start > now.e) {
-				idx++;
-			}
-		}
-		else if (start >= now.e) {
-			idx++;
-		}
+    long long cnt = 0;
+    int cur = 0;
 
-		if (idx >= n) break;
-	}
+    for (int i = 0; i < n; i++) {
+        int s = arr[i].s;
+        int e = arr[i].e;
+
+        if (cur < s) cur = s;
+
+        while (cur < e) {
+            cur += l;
+            cnt++;
+        }
+    }
 
 	cout << cnt;
 
