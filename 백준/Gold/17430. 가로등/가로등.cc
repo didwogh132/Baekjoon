@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -22,7 +22,7 @@ int main() {
 		bool flag = false;
 		cin >> n;
 
-		map<int, vector<int>> arr;
+		unordered_map<int, vector<int>> arr;
 		
 
 		for (int i = 0; i < n; i++) {
@@ -30,8 +30,8 @@ int main() {
 			cin >> y >> x;
 			arr[y].push_back(x);
 		}
-		map<int, vector<int>> ::iterator it;
-		map<int, vector<int>> ::iterator its;
+		unordered_map<int, vector<int>> ::iterator it;
+		unordered_map<int, vector<int>> ::iterator its;
 		
 		for (it = arr.begin(); it != arr.end(); it++) {
 			sort(it->second.begin(), it->second.end());
