@@ -37,16 +37,30 @@ void dijkstra(int y, int x) {
 			cout << dist[Max_y][Max_x];
 			return;
 		}
+
+		int h = arr[now.y][now.x];
 		
 		for (int i = 0; i < 4; i++) {
 			int ny = now.y + ydir[i];
 			int nx = now.x + xdir[i];
-			int nextcost;
 			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
-			if (abs(arr[ny][nx] - arr[now.y][now.x]) > c) continue;
-			if (arr[ny][nx] > arr[now.y][now.x]) nextcost = now.cost + (arr[ny][nx] - arr[now.y][now.x]) * a;
-			else if (arr[ny][nx] < arr[now.y][now.x]) nextcost = now.cost + (arr[now.y][now.x] - arr[ny][nx]) * b;
-			else nextcost = now.cost + 1;
+
+			int nh = arr[ny][nx];
+			int diff = nh - h;
+
+			if (diff > c || diff < -c) continue;
+
+			int add;
+			if (diff > 0) {
+				add = diff * a;
+			}
+			else if (diff < 0) {
+				add = (-diff) * b;
+			}
+			else {
+				add = 1;
+			}
+			int nextcost = now.cost + add;
 			if (dist[ny][nx] <= nextcost) continue;
 			dist[ny][nx] = nextcost;
 			pq.push({ ny, nx, nextcost });
