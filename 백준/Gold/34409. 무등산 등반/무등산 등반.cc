@@ -11,7 +11,7 @@ struct node {
 	int y;
 	int x;
 	int cost;
-	bool operator <(node right) const {
+	bool operator <(const node& right) const {
 		return cost > right.cost;
 	}
 };
@@ -33,42 +33,21 @@ void dijkstra(int y, int x) {
 		node now = pq.top(); pq.pop();
 
 		if (dist[now.y][now.x] < now.cost) continue;
-		if (now.y == Max_y && now.x == Max_x) {
-			cout << dist[Max_y][Max_x];
-			return;
-		}
-
-		int h = arr[now.y][now.x];
 		
 		for (int i = 0; i < 4; i++) {
 			int ny = now.y + ydir[i];
 			int nx = now.x + xdir[i];
+			int nextcost;
 			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
-
-			int nh = arr[ny][nx];
-			int diff = nh - h;
-
-			if (diff > c || diff < -c) continue;
-
-			int add;
-			if (diff > 0) {
-				add = diff * a;
-			}
-			else if (diff < 0) {
-				add = (-diff) * b;
-			}
-			else {
-				add = 1;
-			}
-			int nextcost = now.cost + add;
+			if (abs(arr[ny][nx] - arr[now.y][now.x]) > c) continue;
+			if (arr[ny][nx] > arr[now.y][now.x]) nextcost = now.cost + (arr[ny][nx] - arr[now.y][now.x]) * a;
+			else if (arr[ny][nx] < arr[now.y][now.x]) nextcost = now.cost + (arr[now.y][now.x] - arr[ny][nx]) * b;
+			else nextcost = now.cost + 1;
 			if (dist[ny][nx] <= nextcost) continue;
 			dist[ny][nx] = nextcost;
 			pq.push({ ny, nx, nextcost });
 		}
 	}
-
-	cout << -1;
-	return;
 }
 
 int main() {
@@ -94,6 +73,12 @@ int main() {
 
 	dijkstra(sy, sx);
 
+	if (dist[Max_y][Max_x] == INT_MAX) {
+		cout << -1;
+	}
+	else {
+		cout << dist[Max_y][Max_x];
+	}
 
 	return 0;
 }
