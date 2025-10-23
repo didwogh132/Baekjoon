@@ -6,10 +6,10 @@
 using namespace std;
 
 int n, m, a, b, c;
-int sy, sx;
+short sy, sx;
 struct node {
-	int y;
-	int x;
+	short y;
+    short x;
 	int cost;
 	bool operator <(const node& right) const {
 		return cost > right.cost;
@@ -17,8 +17,8 @@ struct node {
 };
 int ydir[] = { -1, 1, 0, 0 };
 int xdir[] = { 0, 0, -1, 1 };
-int arr[505][505];
-int dist[505][505];
+int arr[501][501];
+int dist[501][501];
 int Max, Max_y, Max_x;
 
 void dijkstra(int y, int x) {
@@ -35,8 +35,8 @@ void dijkstra(int y, int x) {
 		if (dist[now.y][now.x] < now.cost) continue;
 		
 		for (int i = 0; i < 4; i++) {
-			int ny = now.y + ydir[i];
-			int nx = now.x + xdir[i];
+			short ny = now.y + ydir[i];
+			short nx = now.x + xdir[i];
 			int nextcost;
 			if (ny < 1 || nx < 1 || ny > n || nx > m) continue;
             if (dist[ny][nx] <= now.cost) continue;
