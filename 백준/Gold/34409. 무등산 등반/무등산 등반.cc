@@ -5,7 +5,8 @@
 
 using namespace std;
 
-int n, m, a, b, c;
+short n, m;
+int a, b, c;
 short sy, sx;
 struct node {
 	short y;
@@ -15,8 +16,8 @@ struct node {
 		return cost > right.cost;
 	}
 };
-int ydir[] = { -1, 1, 0, 0 };
-int xdir[] = { 0, 0, -1, 1 };
+short ydir[] = { -1, 1, 0, 0 };
+short xdir[] = { 0, 0, -1, 1 };
 int arr[501][501];
 int dist[501][501];
 int Max, Max_y, Max_x;
