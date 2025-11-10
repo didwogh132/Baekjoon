@@ -1,64 +1,61 @@
 #include <iostream>
 #include <vector>
-#include <cstring>
-#include <algorithm>
 #include <queue>
 #include <climits>
 
 using namespace std;
 
+int n, m, a, b;
 struct node {
-    int num;
-    long long cost;
-    bool operator<(node right) const {
-        return cost < right.cost; // 최대힙처럼 사용하기 위해 반대 비교
-    }
+	int num;
+	int cost;
+	bool operator < (const node& right) const {
+		if (cost != right.cost) return cost < right.cost;
+		return false;
+	}
 };
+vector<node> arr[10010];
+int dist[10010];
 
-vector<node> arr[100010];
-long long dist[100010];
-int visited[100010];
-vector<int> visits;
-int n, m;
+void dijkstra(int num) {
+	priority_queue<node> pq;
+	pq.push({ num, INT_MAX });
+	dist[num] = INT_MAX;
 
-void dijkstra(int start) {
-    priority_queue<node> pq;
-    pq.push({ start, INT_MAX });
-    dist[start] = INT_MAX;
+	while (!pq.empty()) {
+		node now = pq.top(); pq.pop();
 
-    while (!pq.empty()) {
-        node now = pq.top(); pq.pop();
+		if (dist[now.num] > now.cost) continue;
 
-        if (dist[now.num] > now.cost) continue;
+		for (int i = 0; i < arr[now.num].size(); i++) {
+			node next = arr[now.num][i];
+			int nextcost = (dist[now.num] > next.cost) ? next.cost : dist[now.num];
 
-        for (int i = 0; i < arr[now.num].size(); i++) {
-            node next = arr[now.num][i];
-            long long newCost = min(dist[now.num], next.cost);
-            if (dist[next.num] < newCost) {
-                dist[next.num] = newCost;
-                visited[next.num] = now.num;
-                pq.push({ next.num, newCost });
-            }
-        }
-    }
+			if (dist[next.num] < nextcost) {
+				dist[next.num] = nextcost;
+				pq.push({ next.num, nextcost });
+			}
+		}
+	}
 }
 
 int main() {
-    memset(visited, -1, sizeof(visited));
-    memset(dist, 0, sizeof(dist));
+	ios_base::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-    cin >> n >> m;
-    for (int i = 0; i < m; i++) {
-        int from, to, cost;
-        cin >> from >> to >> cost;
-        arr[from].push_back({ to, cost });
-        arr[to].push_back({ from, cost });
-    }
-    int a, b;
-    cin >> a >> b;
+	cin >> n >> m;
 
-    dijkstra(a);
+	for (int i = 0; i < m; i++) {
+		int from, to, cost;
+		cin >> from >> to >> cost;
+		arr[from].push_back({ to, cost });
+		arr[to].push_back({ from, cost });
+	}
+	cin >> a >> b;
 
-    cout << dist[b] << endl;
-    return 0;
+	dijkstra(a);
+	
+	cout << dist[b];
+
+	return 0;
 }
