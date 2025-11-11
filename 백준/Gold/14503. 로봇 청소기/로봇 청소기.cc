@@ -1,4 +1,4 @@
-#include <iostream>
+#include <stdio.h>
 
 using namespace std;
 
@@ -6,22 +6,19 @@ int n, m;
 int ydir[] = { -1, 0, 1, 0 };
 int xdir[] = { 0, -1, 0, 1 };
 int sy, sx, d;
-int arr[51][51];
+int arr[50][50];
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(nullptr);
+	scanf("%d %d", &n, &m);
 
-	cin >> n >> m;
-
-	cin >> sy >> sx >> d;
+	scanf("%d %d %d", &sy, &sx, &d);
 
 	if (d == 1) d = 3;
 	else if (d == 3) d = 1;
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			cin >> arr[i][j];
+			scanf("%d", &arr[i][j]);
 		}
 	}
 	int cnt = 0;
@@ -50,7 +47,7 @@ int main() {
 		}
 	}
 
-	cout << cnt;
+	printf("%d", cnt);
 
 	return 0;
 }
