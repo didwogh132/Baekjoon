@@ -1,15 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <string>
-#include <algorithm>
-#include <queue>
 #include <deque>
-#include <stack>
-#include <map>
-#include <set>
-#include <unordered_map>
-#include <climits>
-#include <memory.h>
 
 using namespace std;
 
