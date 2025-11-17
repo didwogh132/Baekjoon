@@ -6,7 +6,7 @@
 
 using namespace std;
 
-int n, m, a, b, tax;
+long long n, m, a, b, tax;
 struct node {
     int num;
     long long cost;
@@ -48,7 +48,7 @@ int main() {
 
     cin >> n >> m >> a >> b >> tax;
 
-    int max_cost = 0;
+    long long max_cost = 0;
 
     for (int i = 0; i < m; i++) {
         int from, to;
@@ -58,8 +58,8 @@ int main() {
         arr[to].push_back({ from, cost });
         max_cost = (cost > max_cost) ? cost : max_cost;
     }
-    int left = 0, right = max_cost;
-    int ans = -1;
+    long long left = 0, right = max_cost;
+    long long ans = -1;
     while (left <= right) {
         int mid = (left + right) / 2;
         if (dijkstra(a, mid)) {
