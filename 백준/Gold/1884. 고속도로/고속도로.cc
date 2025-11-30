@@ -40,6 +40,7 @@ void dijkstra(int num) {
             int nextcost = now.cost + next.cost;
 
             if (nextcost > k) continue;
+            if(nextline >= ans) continue;
             if (dist[nextcost][next.num] <= nextline) continue;
             dist[nextcost][next.num] = nextline;
             pq.push({ next.num, nextline, nextcost });
