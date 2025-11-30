@@ -23,8 +23,7 @@ void dijkstra(int num) {
     dist[0][num] = 0;
     while (!pq.empty()) {
         node now = pq.top(); pq.pop();
-        if (dist[now.cost][now.num] < now.line) continue;
-        if(now.line >= ans) continue;
+        if(dist[now.cost][now.num] < now.line || now.line >= ans) continue;
         if(now.num == n) {
             ans = (now.line < ans) ? now.line : ans;
             continue;
