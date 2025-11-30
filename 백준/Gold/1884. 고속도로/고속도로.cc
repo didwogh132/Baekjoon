@@ -1,8 +1,8 @@
-#include <iostream>
 #include <vector>
 #include <queue>
 #include <climits>
 #include <memory.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -49,26 +49,23 @@ void dijkstra(int num) {
 }
 
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
-    cin >> k >> n >> r;
+    scanf("%d %d %d", &k, &n, &r);
 
     dist.assign(k + 1, vector<int>(n + 1, INT_MAX));
 
     for (int i = 0; i < r; i++) {
         int from, to, line, cost;
-        cin >> from >> to >> line >> cost;
+        scanf("%d %d %d %d", &from, &to, &line, &cost);
         arr[from].push_back({ to, line, cost });
     }
 
     dijkstra(1);
 
     if (ans == INT_MAX) {
-        cout << -1;
+        printf("-1");
     }
     else {
-        cout << ans;
+        printf("%d", ans);
     }
     return 0;
 }
