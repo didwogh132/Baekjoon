@@ -6,18 +6,18 @@
 
 using namespace std;
 
-int k, n, r;
+short k, n, r;
 struct node {
-    int num, line, cost;
+    short num, line, cost;
     bool operator <(const node& right) const {
         return line > right.line;
     }
 };
 vector<node> arr[101];
-vector<vector<int>> dist;
-int ans = INT_MAX;
+vector<vector<short>> dist;
+short ans = 32767;
 
-void dijkstra(int num) {
+void dijkstra(short num) {
     priority_queue<node> pq;
     pq.push({ num, 0, 0 });
     dist[0][num] = 0;
@@ -30,8 +30,8 @@ void dijkstra(int num) {
         }
         for (int i = 0; i < arr[now.num].size(); i++) {
             node next = arr[now.num][i];
-            int nextline = now.line + next.line;
-            int nextcost = now.cost + next.cost;
+            short nextline = now.line + next.line;
+            short nextcost = now.cost + next.cost;
 
             if(nextcost > k || nextline >= ans || dist[nextcost][next.num] <= nextline) continue;
             dist[nextcost][next.num] = nextline;
@@ -41,16 +41,16 @@ void dijkstra(int num) {
 }
 
 int main() {
-    scanf("%d %d %d", &k, &n, &r);
+    scanf("%hd %hd %hd", &k, &n, &r);
 
-    dist.assign(k + 1, vector<int>(n + 1, INT_MAX));
+    dist.assign(k + 1, vector<short>(n + 1, 32767));
     for (int i = 0; i < r; i++) {
-        int from, to, line, cost;
-        scanf("%d %d %d %d", &from, &to, &line, &cost);
+        short from, to, line, cost;
+        scanf("%hd %hd %hd %hd", &from, &to, &line, &cost);
         arr[from].push_back({ to, line, cost });
     }
     dijkstra(1);
-    if (ans == INT_MAX) printf("-1");
-    else printf("%d", ans);
+    if (ans == 32767) printf("-1");
+    else printf("%hd", ans);
     return 0;
 }
