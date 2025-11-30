@@ -24,21 +24,15 @@ int main() {
         for (int s = 1; s + len - 1 <= n; s++) {
             int e = s + len - 1;
 
+            if (arr[s] != arr[e]) {
+                dp[s][e] = false;
+                continue;
+            }
             if (len == 2) {
-                if (arr[s] == arr[e]) {
-                    dp[s][e] = true;
-                }
-                else {
-                    dp[s][e] = false;
-                }
+                dp[s][e] = true;
             }
             else {
-                if (arr[s] == arr[e] && dp[s+1][e-1]) {
-                    dp[s][e] = true;
-                }
-                else {
-                    dp[s][e] = false;
-                }
+                dp[s][e] = dp[s + 1][e - 1];
             }
         }
     }
