@@ -17,6 +17,7 @@ struct node {
 };
 vector<node> arr[101];
 int dist[10001][101];
+int ans = INT_MAX;
 
 void dijkstra(int num) {
     priority_queue<node> pq;
@@ -27,6 +28,11 @@ void dijkstra(int num) {
         node now = pq.top(); pq.pop();
 
         if (dist[now.cost][now.num] < now.line) continue;
+        if(now.line >= ans ) continue;
+        
+        if(now.num == n) {
+            ans = (now.line < ans) ? now.line : ans;
+        }
 
         for (int i = 0; i < arr[now.num].size(); i++) {
             node next = arr[now.num][i];
@@ -58,12 +64,6 @@ int main() {
     }
 
     dijkstra(1);
-
-    int ans = INT_MAX;
-
-    for (int i = 0; i <= k; i++) {
-        ans = (dist[i][n] < ans) ? dist[i][n] : ans;
-    }
 
     if (ans == INT_MAX) {
         cout << -1;
