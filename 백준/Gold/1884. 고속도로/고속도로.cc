@@ -16,7 +16,7 @@ struct node {
     }
 };
 vector<node> arr[101];
-int dist[10001][101];
+vector<vector<int>> dist;
 int ans = INT_MAX;
 
 void dijkstra(int num) {
@@ -54,9 +54,7 @@ int main() {
 
     cin >> k >> n >> r;
 
-    for (int i = 0; i <= k; i++) {
-        fill(dist[i], dist[i] + n + 1, INT_MAX);
-    }
+    dist.assign(k + 1, vector<int>(n + 1, INT_MAX));
 
     for (int i = 0; i < r; i++) {
         int from, to, line, cost;
