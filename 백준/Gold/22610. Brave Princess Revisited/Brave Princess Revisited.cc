@@ -30,7 +30,7 @@ void dijkstra(int num) {
 		if (dist[now.line][now.num] < now.cost) continue;
 		if (now.num == n) {
 			ans = (dist[now.line][now.num] < ans) ? dist[now.line][now.num] : ans;
-			continue;
+			return;
 		}
 
 		for (int i = 0; i < arr[now.num].size(); i++) {
