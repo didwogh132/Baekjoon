@@ -3,17 +3,26 @@
 
 using namespace std;
 
-int a;
-string s;
-int cnt[130];
 int main() {
-    cin >> a >> s;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
 
-    for (int i = 0; i < s.size(); i++) cnt[s[i]]++;
+    int n;
+    int a = 0, b = 0;
+    cin >> n;
 
-    if (cnt['b'] > cnt['s']) cout << "bigdata?";
-    else if (cnt['b'] == cnt['s']) cout << "bigdata? security!";
-    else cout << "security!";
-
+    string x;
+    cin >> x;
+    for (int i = 0; i < x.size(); i++) {
+        if (x[i] == 's') {
+            a++;
+        }
+        else if (x[i] == 'b') {
+            b++;
+        }
+    }
+    if (a > b) cout << "security!";
+    else if (a == b) cout << "bigdata? security!";
+    else cout << "bigdata?";
     return 0;
 }
