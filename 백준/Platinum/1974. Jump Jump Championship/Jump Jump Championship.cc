@@ -12,8 +12,8 @@ namespace algo {
             vector<int> lis;
             vector<int> lis_idx;
         public:
-            void setArray(const vector<int>& input) {
-                arr = input;
+            void setArray(vector<int>& input) {
+                arr.swap(input);
                 lis.clear();
                 lis_idx.clear();
                 lis_idx.resize(arr.size(), 0);
@@ -48,12 +48,12 @@ namespace algo {
                 path.reserve(lis.size());
 
                 for (int i = n - 1; i >= 0; i--) {
-                    if (lis.size() == 0) break;
-
                     if (lis_idx[i] == need) {
                         path.push_back(i + 1);
                         need--;
+                        continue;
                     }
+                    if (need == 0) break;
                 }
 
                 return path;
