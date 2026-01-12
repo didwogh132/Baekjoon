@@ -56,8 +56,6 @@ namespace algo {
                     }
                 }
 
-                reverse(path.begin(), path.end());
-
                 return path;
             }
         };
@@ -87,7 +85,7 @@ int main() {
         cout << lis.length() << "\n";
 
         vector<int> path = lis.trace();
-        for (int i = 0; i < path.size(); i++) {
+        for (int i = path.size() -1; i >= 0; i--) {
             cout << path[i] << " ";
         }
         cout << "\n";
