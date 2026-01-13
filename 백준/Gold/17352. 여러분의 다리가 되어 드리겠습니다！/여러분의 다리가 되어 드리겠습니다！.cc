@@ -67,8 +67,6 @@ int main() {
             dsu.unite(a, b);
         }
 
-        for (int i = 1; i <= n; i++) dsu.find(i);
-
         for (int i = 1; i <= n; i++) {
             if (ret.size() == 2) break;
             int num = dsu.find(i);
