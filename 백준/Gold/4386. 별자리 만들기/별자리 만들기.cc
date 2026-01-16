@@ -1,8 +1,7 @@
-#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include <iomanip>
+#include <stdio.h>
 
 using namespace std;
 
@@ -60,17 +59,17 @@ namespace algo {
     }
 }
 int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-
     int n;
-    cin >> n;
+    scanf("%d", &n);
 
     algo::ds::MST mst(n);
     vector<point> a;
     vector<node> arr;
-    a.resize(n);
-    for (int i = 0; i < n; i++) cin >> a[i].x >> a[i].y;
+    for (int i = 0; i < n; i++) {
+        point num;
+        scanf("%lf %lf", &num.x, &num.y);
+        a.push_back(num);
+    }
 
     for (int i = 0; i < n -1; i++) {
         for (int j = i + 1; j < n; j++) {
@@ -88,6 +87,6 @@ int main() {
         }
     }
 
-    cout << fixed << setprecision(2) << sum;
+    printf("%.2f", sum);
     return 0;
 }
