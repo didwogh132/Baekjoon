@@ -26,9 +26,14 @@ namespace algo {
             }
 
             int find(int x) {
-                if (parent[x] == x) return x;
-                parent[x] = find(parent[x]);
-                return parent[x];
+                int root = x;
+                while (parent[root] != root) root = parent[root];
+                while (parent[x] != x) {
+                    int p = parent[x];
+                    parent[x] = root;
+                    x = p;
+                }
+                return root;
             }
 
             bool unite(int a, int b) {
