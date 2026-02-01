@@ -37,11 +37,7 @@ namespace algo {
 
                 if (ra == rb) return false;
 
-                if (sz[ra] < sz[rb]) {
-                    int temp = ra;
-                    ra = rb;
-                    rb = temp;
-                }
+                if (sz[ra] < sz[rb]) swap(ra, rb);
                 parent[rb] = ra;
                 sz[ra] += sz[rb];
                 return true;
@@ -60,6 +56,7 @@ int main() {
     algo::ds::UNION dsu(n);
 
     vector<node> arr;
+    arr.reserve(m);
     int ans = 1;
     for (int i = 0; i < m; i++) {
         int u, v, day;
