@@ -6,7 +6,7 @@ using namespace std;
 
 struct node {
     int u, v;
-    long long cost;
+    unsigned int cost;
     bool operator <(const node& right) {
         return cost > right.cost;
     }
@@ -56,7 +56,7 @@ int main() {
     int n;
     cin >> n;
 
-    vector<long long> num;
+    vector<unsigned int> num;
     vector<node> arr;
     algo::ds::MST mst(n);
 
@@ -67,17 +67,20 @@ int main() {
 
     for (int i = 0; i < n - 1; i++) {
         for (int j = 1; j < n; j++) {
-            long long cost = num[i] ^ num[j];
+            unsigned int cost = num[i] ^ num[j];
             arr.push_back({ i, j, cost });
         }
     }
 
     sort(arr.begin(), arr.end());
     long long sum = 0;
+    int cnt = 0;
 
     for (int i = 0; i < arr.size(); i++) {
+        if (cnt == n - 1) break;
         if (mst.unite(arr[i].u, arr[i].v)) {
-            sum += arr[i].cost;
+            sum += (long long)arr[i].cost;
+            cnt++;
         }
     }
 
