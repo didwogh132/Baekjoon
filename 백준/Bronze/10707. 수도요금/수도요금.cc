@@ -11,7 +11,6 @@ int main() {
     if (p > c) {
         b_cost += (p - c) * d;
     }
-    int ans = (a_cost > b_cost) ? b_cost : a_cost;
-    cout << ans;
+    cout << ((a_cost > b_cost) ? b_cost : a_cost);
     return 0;
 }
