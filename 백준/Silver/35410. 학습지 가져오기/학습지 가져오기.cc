@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 using namespace std;
 
@@ -22,12 +23,7 @@ int main() {
     int num = 0;
 
     for (int i = 0; i < n; i++) {
-        if (num < arr[i]) {
-            num = arr[i] + 1;
-        }
-        else {
-            num++;
-        }
+        num = max(num, arr[i]) + 1;
     }
 
     cout << num;
